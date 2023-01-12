@@ -17,6 +17,7 @@ import mindustry.mod.*;
 import mindustry.net.Packets.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.meta.*;
 import mindustry.world.blocks.storage.*;
 
 import static arc.util.Log.*;
@@ -32,7 +33,8 @@ public class HexedMod extends Plugin{
 
     public static final int messageTime = 1;
     //in ticks: 60 minutes
-    private final static int roundTime = 60 * 60 * 90;
+    // ラウンド時間を変更。最後の数字のところを変更。単位は分 1440=24hour
+    private final static int roundTime = 60 * 60 * 1440;
     //in ticks: 3 minutes
     private final static int leaderboardTime = 60 * 60 * 2;
 
@@ -55,7 +57,8 @@ public class HexedMod extends Plugin{
     @Override
     public void init(){
         //TODO these should probably be configurable?
-        rules.pvp = true;
+        // rules.pvp = true;
+        rules.pvp = false;
         rules.tags.put("hexed", "true");
         rules.loadout = ItemStack.list(Items.copper, 300, Items.lead, 500, Items.graphite, 150, Items.metaglass, 150, Items.silicon, 150, Items.plastanium, 50);
         rules.buildCostMultiplier = 1f;
@@ -66,7 +69,11 @@ public class HexedMod extends Plugin{
         rules.unitDamageMultiplier = 1.1f;
         rules.canGameOver = false;
 
-        start = Schematics.readBase64("bXNjaAB4nE2SgY7CIAyGC2yDsXkXH2Tvcq+AkzMmc1tQz/j210JpXDL8hu3/lxYY4FtBs4ZbBLvG1ync4wGO87bvMU2vsCzTEtIlwvCxBW7e1r/43hKYkGY4nFN4XqbfMD+29IbhvmHOtIc1LjCmuIcrfm3X9QH2PofHIyYY5y3FaX3OS3ze4fiRwX7dLa5nDHTPddkCkT3l1DcA/OALihZNq4H6NHnV+HZCVshJXA9VYZC9kfVU+VQGKSsbjVT1lOgp1qO4rGIo9yvnquxH1ORIohap6HVIDbtpaNlDi4cWD80eFJdrNhbJc8W61Jzdqi/3wrRIRii7GYdelvWMZDQs1kNbqtYe9/KuGvDX5zD6d5SML66+5dwRqXgQee5GK3Edxw1ITfb3SJ71OomzUAdjuWsWqZyJavd8Issdb5BqVbaoGCVzJqrddaUGTWSFHPs67m6H5HlaTqbqpFc91Kfn+2eQSp9pr96/Xtx6cevZjeKKDuUOklvvXy9uPGdNZFjZi7IXZS/n8Hyf/wFbjj/q");
+        Log.info("&ly--START msg--");
+
+        // start = Schematics.readBase64("bXNjaAB4nE2SgY7CIAyGC2yDsXkXH2Tvcq+AkzMmc1tQz/j210JpXDL8hu3/lxYY4FtBs4ZbBLvG1ync4wGO87bvMU2vsCzTEtIlwvCxBW7e1r/43hKYkGY4nFN4XqbfMD+29IbhvmHOtIc1LjCmuIcrfm3X9QH2PofHIyYY5y3FaX3OS3ze4fiRwX7dLa5nDHTPddkCkT3l1DcA/OALihZNq4H6NHnV+HZCVshJXA9VYZC9kfVU+VQGKSsbjVT1lOgp1qO4rGIo9yvnquxH1ORIohap6HVIDbtpaNlDi4cWD80eFJdrNhbJc8W61Jzdqi/3wrRIRii7GYdelvWMZDQs1kNbqtYe9/KuGvDX5zD6d5SML66+5dwRqXgQee5GK3Edxw1ITfb3SJ71OomzUAdjuWsWqZyJavd8Issdb5BqVbaoGCVzJqrddaUGTWSFHPs67m6H5HlaTqbqpFc91Kfn+2eQSp9pr96/Xtx6cevZjeKKDuUOklvvXy9uPGdNZFjZi7IXZS/n8Hyf/wFbjj/q");
+        // 自作コア
+        start = Schematics.readBase64("bXNjaAF4nD2S266bMBBFZwyJwdgx+ZA89JMsgqpIBCIup+pTf72z2adVoiw7nrXH2MhdspN6Lu9RmnUpz+XYf0j3HLdhfX321zKLdHLflqmsj0+Zx+lho5+j5M9Utr3Mr+P9+FWmSe7763s6LPPX+HtZxW9D2fdxlet7nJ/Gy1c5pl2aY56slf2R/ktnRmvqXl6zrcRhWcfHfAzTeGwStsOaskjkj4jaB1+pxDlDLQJciCvhiYZoiUCvw0QlMepMUaYoU5QpyhRlijJFmaJIUZufuqPuqDvqjrqj7qg76g56ZfK5/woLFxvUooCXCgiiWIuiqEx4thp1NscoYqQePaUClHCEaUAibqLntggl7Gkag6W3tkmP47pa1wprkUjEDfDUPXUPHYhcS4RVBjwxoYQjKqImAtERkUjE2a9lv5b9Wm63RQoQWBKJRJxeoBfoBe4zsDKwMqDSW28hlHA4+IgNAp4IOMGO59nxPDucJ27GrhRH9e9S4velYCmJq/EjFRDx5mXcvKI1XoUbbhO4EFfCEw3REoEe9mspCbPMlMyUzJTMlMyUzJTMlMyUjBSVnnpPvafeU++p99R76j31Hvpf8dtFVg==");
 
         Events.run(Trigger.update, () -> {
             if(active()){
@@ -188,7 +195,8 @@ public class HexedMod extends Plugin{
     void updateText(Player player){
         HexTeam team = data.data(player);
 
-        StringBuilder message = new StringBuilder("[white]Hex #" + team.location.id + "\n");
+        // StringBuilder message = new StringBuilder("[white]Hex #" + team.location.id + "\n");
+        StringBuilder message = new StringBuilder("");
 
         if(!team.lastMessage.get()) return;
 
@@ -254,7 +262,7 @@ public class HexedMod extends Plugin{
              }
         });
 
-        handler.<Player>register("captured", "Dispay the number of hexes you have captured.", (args, player) -> {
+        handler.<Player>register("cap", "Dispay the number of hexes you have captured.", (args, player) -> {
             if(player.team() == Team.derelict){
                 player.sendMessage("[scarlet]You're spectating.");
             }else{
@@ -262,11 +270,11 @@ public class HexedMod extends Plugin{
             }
         });
 
-        handler.<Player>register("leaderboard", "Display the leaderboard", (args, player) -> {
+        handler.<Player>register("b", "Display the leaderboard", (args, player) -> {
             player.sendMessage(getLeaderboard());
         });
 
-        handler.<Player>register("hexstatus", "Get hex status at your position.", (args, player) -> {
+        handler.<Player>register("hs", "Get hex status at your position.", (args, player) -> {
             Hex hex = data.data(player).location;
             if(hex != null){
                 hex.updateController();
@@ -311,7 +319,25 @@ public class HexedMod extends Plugin{
         Log.info("&ly--SERVER RESTARTING--");
         Time.runTask(60f * 10f, () -> {
             netServer.kickAll(KickReason.serverRestarting);
-            Time.runTask(5f, () -> System.exit(2));
+            // マップ初期化
+            // init();
+
+            Log.info("&ly--init start--");
+
+            data = null;
+            data = new HexData();
+
+            logic.reset();
+            Log.info("Generating map...");
+            HexedGenerator generator = new HexedGenerator();
+            world.loadGenerator(Hex.size, Hex.size, generator);
+            data.initHexes(generator.getHex());
+            info("Map generated.");
+            state.rules = rules.copy();
+            logic.play();
+
+            Log.info("&ly--init complete--");
+            // Time.runTask(5f, () -> System.exit(2));
         });
     }
 
