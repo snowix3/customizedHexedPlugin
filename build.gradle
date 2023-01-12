@@ -11,9 +11,50 @@ repositories{
     maven{ url 'https://www.jitpack.io' }
 }
 
+// buildscript{
+//     ext{
+//         getArcHash = {
+//             return new Properties().with{ p -> p.load(file('gradle.properties').newReader()); return p }["archash"]
+//         }
+
+//         arcHash = getArcHash()
+//     }
+    
+//     repositories{
+//         mavenLocal()
+//         mavenCentral()
+//         google()
+//         maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//         maven{ url 'https://jitpack.io' }
+//     }
+
+//     dependencies{
+//         classpath "com.github.Anuken.Arc:packer:$arcHash"
+//         classpath "com.github.Anuken.Arc:arc-core:$arcHash"
+//         classpath "com.github.Anuken.Arc:arc-core:v138"
+//         classpath("com.github.Anuken.MindustryJitpack:core:030e9a6bef")
+//     }
+// }
 dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:v138"
-    compileOnly("com.github.Anuken.MindustryJitpack:core:030e9a6bef")
+    // compileOnly("com.github.Anuken.MindustryJitpack:core:030e9a6bef")
+    // compileOnly("com.github.Anuken.MindustryJitpack:core:b5ae8d24ba")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:93ba452116")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:486b309a75")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:aa5ad5320a")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:b2996b9d37")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:23aeb1fcc7")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:6e5c77eac2")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:b908f4836c")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:4576bb6dd9")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:a65b96f8bb")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:82076b8819")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:ca30ac605a")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:2ec050e48d")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:4d8709eada")
+    // compileOnly("com.github.Anuken.MindustryJitpack:core:811513095a")
+    compileOnly("com.github.Anuken.MindustryJitpack:core:38a61d0fd5")
+    
 }
 
 allprojects{
